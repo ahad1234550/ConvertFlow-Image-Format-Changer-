@@ -42,16 +42,6 @@ ConvertFlow is a professional file conversion tool that allows users to convert 
    http://localhost:8000
    ```
 
-## Deployment
-
-For deployment to Hostinger or any Apache server:
-
-1. Upload all files to `public_html` folder
-2. Make sure `.htaccess` file is included
-3. The website will work with clean URLs automatically
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
-
 ## Author
 
 **Ahad**  
