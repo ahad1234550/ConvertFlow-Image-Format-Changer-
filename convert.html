@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert your files instantly with ConvertFlow. Support for JPG, PNG, SVG, WebP, GIF, BMP, and more. Fast, free, and secure online file conversion.">
+    <meta name="keywords" content="convert files, image converter, JPG to PNG, PNG to JPG, file format converter, online converter, free conversion">
+    <meta name="author" content="ConvertFlow">
+    <title>Convert Files Online - ConvertFlow | Free Image & File Converter</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>ConvertFlow</span>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/about" class="nav-link">About</a>
+                    <a href="/convert" class="nav-link active">Convert</a>
+                    <a href="/contact" class="nav-link">Contact</a>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Convert Your Files</h1>
+            <p class="page-subtitle">Fast, secure, and easy file conversion</p>
+        </div>
+    </section>
+
+    <!-- Converter Section -->
+    <section class="converter-section">
+        <div class="container">
+            <div class="converter-wrapper">
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content" id="uploadContent">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3 class="upload-title">Drop your file here</h3>
+                        <p class="upload-description">or click to browse</p>
+                        <input type="file" id="fileInput" class="file-input" accept="image/*,.svg">
+                        <button class="btn btn-primary" id="browseBtn">
+                            <i class="fas fa-folder-open"></i>
+                            Browse Files
+                        </button>
+                        <p class="upload-note">Supported formats: JPG, PNG, SVG, WebP, ICO, GIF, BMP</p>
+                    </div>
+                    
+                    <!-- File Preview (Hidden Initially) -->
+                    <div class="file-preview" id="filePreview" style="display: none;">
+                        <div class="preview-header">
+                            <div class="preview-info">
+                                <i class="fas fa-file-image preview-icon"></i>
+                                <div class="preview-details">
+                                    <h4 class="preview-filename" id="previewFilename">filename.jpg</h4>
+                                    <p class="preview-filesize" id="previewFilesize">2.5 MB</p>
+                                </div>
+                            </div>
+                            <button class="remove-file-btn" id="removeFileBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="preview-image-container" id="previewImageContainer">
+                            <img src="" alt="Preview" id="previewImage" class="preview-image">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversion Options -->
+                <div class="conversion-options" id="conversionOptions" style="display: none;">
+                    <div class="options-header">
+                        <h3 class="options-title">Conversion Settings</h3>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="outputFormat" class="option-label">
+                            <i class="fas fa-exchange-alt"></i>
+                            Output Format
+                        </label>
+                        <select id="outputFormat" class="format-select">
+                            <option value="">Select format...</option>
+                            <option value="png">PNG - Portable Network Graphics</option>
+                            <option value="jpg">JPG - JPEG Image</option>
+                            <option value="jpeg">JPEG - JPEG Image</option>
+                            <option value="svg">SVG - Scalable Vector Graphics</option>
+                            <option value="webp">WebP - Web Picture Format</option>
+                            <option value="ico">ICO - Icon File</option>
+                            <option value="gif">GIF - Graphics Interchange Format</option>
+                            <option value="bmp">BMP - Bitmap Image</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="qualitySlider" class="option-label">
+                            <i class="fas fa-sliders-h"></i>
+                            Quality: <span id="qualityValue">75</span>%
+                        </label>
+                        <input 
+                            type="range" 
+                            id="qualitySlider" 
+                            class="quality-slider" 
+                            min="50" 
+                            max="100" 
+                            value="75"
+                        >
+                        <div class="slider-labels">
+                            <span>Low</span>
+                            <span>Medium</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-large btn-block" id="convertBtn" disabled>
+                        <i class="fas fa-magic"></i>
+                        Convert File
+                    </button>
+                </div>
+
+                <!-- Progress Section -->
+                <div class="progress-section" id="progressSection" style="display: none;">
+                    <div class="progress-header">
+                        <h3 class="progress-title">Converting...</h3>
+                        <p class="progress-description">Please wait while we process your file</p>
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-percentage" id="progressPercentage">0%</div>
+                    </div>
+
+                    <div class="progress-steps">
+                        <div class="progress-step active" id="step1">
+                            <div class="step-icon">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <span>Uploading</span>
+                        </div>
+                        <div class="progress-step" id="step2">
+                            <div class="step-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <span>Processing</span>
+                        </div>
+                        <div class="progress-step" id="step3">
+                            <div class="step-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Complete</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div class="download-section" id="downloadSection" style="display: none;">
+                    <div class="success-animation">
+                        <div class="success-checkmark">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <h3 class="download-title">Conversion Complete!</h3>
+                    <p class="download-description">Your file is ready to download</p>
+                    
+                    <div class="download-info">
+                        <div class="download-file-info">
+                            <i class="fas fa-file-download"></i>
+                            <div>
+                                <h4 id="downloadFilename">converted-file.png</h4>
+                                <p id="downloadFilesize">2.3 MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-large btn-block" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Download File
+                    </button>
+                    
+                    <button class="btn btn-secondary btn-block" id="convertAnotherBtn">
+                        <i class="fas fa-redo"></i>
+                        Convert Another File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Supported Formats -->
+            <div class="supported-formats">
+                <h3 class="formats-title">Supported Formats</h3>
+                <div class="formats-grid">
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>JPG</span>
+                    </div>
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>PNG</span>
+                    </div>
+
+                    <div class="format-badge">
+                        <i class="fas fa-file-code"></i>
+                        <span>SVG</span>
+                    </div>
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>WebP</span>
+                    </div>
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>ICO</span>
+                    </div>
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>GIF</span>
+                    </div>
+                    <div class="format-badge">
+                        <i class="fas fa-file-image"></i>
+                        <span>BMP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>ConvertFlow</span>
+                    </div>
+                    <p class="footer-description">
+                        The most trusted online file conversion tool. 
+                        Fast, secure, and free forever.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/convert">Convert</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Formats</h4>
+                    <ul class="footer-links">
+                        <li><a href="/convert">JPG to PNG</a></li>
+                        <li><a href="/convert">PDF to JPG</a></li>
+                        <li><a href="/convert">PNG to SVG</a></li>
+                        <li><a href="/convert">WebP to PNG</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ConvertFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
